@@ -57,7 +57,7 @@ REFERENCES "employees" ("emp_no");
 
 ALTER TABLE "salaries" ADD CONSTRAINT "fk_salaries_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
-
+--Verify that information was sucsesssfully uploaded
 select * from departments;
 select * from dept_emp;
 select * from dept_manager;
@@ -73,7 +73,8 @@ ON employees.emp_no = salaries.emp_no;
 --2. List first name, last name, and hire date for employees who were hired in 1986.
 SELECT employees.first_name, employees.last_name, employees.hire_date
 FROM employees
-WHERE hire_date BETWEEN '1/1/1986' and '12/31/1986';
+WHERE hire_date >= '1986-01-01'
+AND hire_date < '1987-01-01';
 --3. List the manager of each department with the following information: department number, department name, the manager's employee number, last name, first name.
 SELECT departments.dept_no, departments.dept_name, dept_manager.emp_no, employees.first_name, employees.last_name
 FROM departments
@@ -82,7 +83,9 @@ ON departments.dept_no = dept_manager.dept_no
 JOIN employees
 ON dept_manager.emp_no = employees.emp_no;
 --4. List the department of each employee with the following information: employee number, last name, first name, and department name.
-
+SELECT dept_emp.emp_no, employees.last_name, employees.first_name, dept_emp.dept_no
+From employees
+JOIN dept_emp ON emp_no= 
 --5. List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
 
 --6. List all employees in the Sales department, including their employee number, last name, first name, and department name.
